@@ -11,6 +11,6 @@ app.use(express.json())
 const swaggerDoc = swaggerJSDoc(swaggerConfig)
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 
-app.use(userRouter)
+app.use('/users', userRouter)
 
 app.listen(3334, () => console.log('running at port 3334'))
