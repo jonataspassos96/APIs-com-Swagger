@@ -11,5 +11,7 @@ const swaggerConfig = {
       description: 'servidor local'
     }]
   },
-  apis: ['./src/routes/user.routes.js']
+  apis: ['./src/routes/user.routes.ts']
 }
+
+export default swaggerConfig

@@ -1,17 +1,25 @@
+import { Request, Response } from 'express'
 import { randomUUID } from 'crypto'
-const users = []
 
-const getAll = (req, res) => res.json(users)
+interface IUser {
+  id: string
+  email: string
+  password: string
+}
 
-const create = (req, res) => {
+const users: Array<IUser> = []
+
+const getAll = (req: Request, res: Response) => res.json(users)
+
+const create = (req: Request, res: Response) => {
   const { email, password } = req.body
-  const user = { email, password, id: randomUUID() }
+  const user: IUser = { email, password, id: randomUUID() }
 
   users.push(user)
   return res.status(201).json(user)
 }
 
-const getById = (req, res) => {
+const getById = (req: Request, res: Response) => {
   const { id } = req.params
   const userFinded = users.find(u => u.id === id)
 
