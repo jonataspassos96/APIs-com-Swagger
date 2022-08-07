@@ -57,6 +57,8 @@ userRouter.get('/', ensureAuth, userController.getAll)
  *    get:
  *      tags: [Users]
  *      description: Endpoint que retorna um usuário por id
+ *      security:
+ *        - bearerAuth: []
  *      parameters:
  *        - in: path
  *          name: id
@@ -94,5 +96,85 @@ userRouter.get('/:id', userController.getById)
  *                $ref: '#/components/schemas/User'
  */
 userRouter.post('/', userController.create)
+
+/**
+ * @swagger
+ *  /users/{id}:
+ *    put:
+ *      tags: [Users]
+ *      description: Endpoint para atualizar um usuário
+ *      security:
+ *        - bearerAuth: []
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          type: string
+ *          required: true
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              $ref: '#/components/schemas/User'
+ *      responses:
+ *        200:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                $ref: '#/components/schemas/User'
+ */
+userRouter.put('/:id', userController.update)
+
+/**
+ * @swagger
+ *  /users/{id}:
+ *    delete:
+ *      tags: [Users]
+ *      description: Endpoint que remover um usuário por id
+ *      security:
+ *        - bearerAuth: []
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          type: string
+ *          required: true
+ *      responses:
+ *        200:
+ *          description: OK
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                      type: string
+ *              example:
+ *                  message: User removed successfully
+ *        401:
+ *          description: Unauthorized
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                      type: string
+ *              example:
+ *                  message: Unauthorized
+ *        400:
+ *          description: User not found
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                      type: string
+ *              example:
+ *                  message: User not found
+ */
+userRouter.delete('/:id', userController.remove)
 
 export default userRouter

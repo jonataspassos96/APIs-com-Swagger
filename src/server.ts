@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 import swaggerConfig from './docs/swagger.config'
@@ -10,6 +10,12 @@ app.use(express.json())
 
 const swaggerDoc = swaggerJSDoc(swaggerConfig)
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
+
+app.get('/terms', (req: Request, res: Response) => {
+  return res.json({
+    message: 'Termos de Serviço'
+  })
+})
 
 app.use('/users', userRouter)
 
